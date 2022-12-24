@@ -7,6 +7,36 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    function index()
+    {
+        $aspirations = Aspiration::orderBy('id', 'ASC')->get();
+        return response()->json([
+            "status" => true,
+            "message" => "",
+            "data" => $aspirations
+        ]);
+    }
+
+    function detail($id)
+    {
+        $aspiration = Aspiration::find($id);
+
+        // memeriksa apakah terdapat author dengan id sesuai yang diberikan
+        if (!isset($aspiration)) {
+            return response()->json([
+                "status" => false,
+                "message" => "Aspirasi tidak ditemukan",
+                "data" => null
+            ]);
+        }
+
+        return response()->json([
+            "status" => true,
+            "message" => "",
+            "data" => $aspiration
+        ]);
+    }
+
     function store(Request $request)
     {
         $payload = $request->all();
