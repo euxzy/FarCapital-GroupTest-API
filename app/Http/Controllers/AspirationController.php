@@ -89,7 +89,7 @@ class AspirationController extends Controller
     {
         $payload = $request->all();
 
-        $columns = ["aspirator", "nik", "story", "photo", "is_read"];
+        $columns = ["aspirator", "nik", "story", "photo"];
         foreach ($columns as $col) {
             if (!isset($payload[$col])) {
                 $message = "{$col} tidak boleh kosong";
