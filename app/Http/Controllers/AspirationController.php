@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aspiration;
 use Illuminate\Http\Request;
 
 class AspirationController extends Controller
@@ -24,7 +25,7 @@ class AspirationController extends Controller
 
         $payload['photo'] = $request->file("photo")->store("images", "public");
         
-        $author = Aspirasi::create($payload);
+        $author = Aspiration::create($payload);
         return response()->json([
             "status" => true,
             "message" => "Aspirasi berhasil ditambahkan",
