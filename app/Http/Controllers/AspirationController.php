@@ -56,7 +56,7 @@ class AspirationController extends Controller
             ]);
         }
 
-        $aspirations = Aspiration::query()->where('is_read', $statusId)->get();
+        $aspirations = Aspiration::query()->where('is_read', $statusId)->latest()->get();
 
         if ($statusId == 0) {
             return response()->json([
