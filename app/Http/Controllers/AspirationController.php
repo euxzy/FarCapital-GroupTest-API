@@ -7,12 +7,23 @@ use Illuminate\Http\Request;
 
 class AspirationController extends Controller
 {
-    function store(Request $request)
+    public function index()
+    {
+        $aspirations = Aspiration::query()->get();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Get All Aspirations Success!',
+            'data' => $aspirations
+        ]);
+    }
+
+    public function store(Request $request)
     {
         $payload = $request->all();
-        
+
         $columns = ["aspirator", "nik", "story", "photo", "is_read"];
-        foreach($columns as $col) {
+        foreach ($columns as $col) {
             if (!isset($payload[$col])) {
                 $message = "{$col} tidak boleh kosong";
                 return response()->json([
@@ -24,7 +35,7 @@ class AspirationController extends Controller
         }
 
         $payload['photo'] = $request->file("photo")->store("images", "public");
-        
+
         $author = Aspiration::create($payload);
         return response()->json([
             "status" => true,
