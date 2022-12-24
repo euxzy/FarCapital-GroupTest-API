@@ -16,7 +16,6 @@ class AspirationController extends Controller
             'message' => 'Mengambil semua data aspirasi berhasil!',
             'data' => $aspirations->makeHidden([
                 "id",
-                'created_at',
                 'updated_at',
             ])
         ]);
@@ -40,7 +39,6 @@ class AspirationController extends Controller
             "message" => "Detail Aspirasi",
             "data" => $aspiration->makeHidden([
                 "id",
-                "created_at",
                 "updated_at",
             ])
         ]);
@@ -68,7 +66,6 @@ class AspirationController extends Controller
                 'message' => 'Daftar aspirasi yang belum dibaca!',
                 'data' => $aspirations->makeHidden([
                     'id',
-                    'created_at',
                     'updated_at',
                 ])
             ]);
@@ -79,7 +76,6 @@ class AspirationController extends Controller
             'message' => 'Daftar aspirasi yang sudah dibaca!',
             'data' => $aspirations->makeHidden([
                 'id',
-                'created_at',
                 'updated_at',
             ])
         ]);
@@ -110,7 +106,6 @@ class AspirationController extends Controller
             "message" => "Aspirasi berhasil ditambahkan",
             "data" => $aspiration->makeHidden([
                 "id",
-                "created_at",
                 "updated_at",
             ])
         ]);
