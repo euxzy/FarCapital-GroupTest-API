@@ -106,10 +106,10 @@ class AspirationController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update($id)
     {
         $payload = [
-            'is_read' => $request->id
+            'is_read' => 1
         ];
 
         $aspiration = Aspiration::query()->where('id', $id)->first();
