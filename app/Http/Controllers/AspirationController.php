@@ -13,8 +13,13 @@ class AspirationController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => 'Get All Aspirations Success!',
-            'data' => $aspirations
+            'message' => 'Mengambil semua data aspirasi berhasil!',
+            'data' => $aspirations->makeHidden([
+                "id",
+                'created_at',
+                'updated_at',
+                'is_read'
+            ])
         ]);
     }
 
@@ -33,8 +38,13 @@ class AspirationController extends Controller
 
         return response()->json([
             "status" => true,
-            "message" => "",
-            "data" => $aspiration
+            "message" => "Detail Aspirasi",
+            "data" => $aspiration->makeHidden([
+                "id",
+                "created_at",
+                "updated_at",
+                "is_read"
+            ])
         ]);
     }
 
@@ -58,14 +68,24 @@ class AspirationController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'Daftar aspirasi yang belum dibaca!',
-                'data' => $aspirations
+                'data' => $aspirations->makeHidden([
+                    'id',
+                    'created_at',
+                    'updated_at',
+                    'is_read'
+                ])
             ]);
         }
 
         return response()->json([
             'status' => true,
             'message' => 'Daftar aspirasi yang sudah dibaca!',
-            'data' => $aspirations
+            'data' => $aspirations->makeHidden([
+                'id',
+                'created_at',
+                'updated_at',
+                'is_read'
+            ])
         ]);
     }
 
@@ -95,7 +115,8 @@ class AspirationController extends Controller
             "data" => $aspiration->makeHidden([
                 "id",
                 "created_at",
-                "updated_at"
+                "updated_at",
+                "is_read"
             ])
         ]);
     }
