@@ -9,7 +9,7 @@ class AspirationController extends Controller
 {
     public function index()
     {
-        $aspirations = Aspiration::query()->get();
+        $aspirations = Aspiration::latest()->get();
 
         return response()->json([
             'status' => true,
