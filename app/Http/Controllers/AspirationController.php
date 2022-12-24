@@ -13,8 +13,13 @@ class AspirationController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => 'Get All Aspirations Success!',
-            'data' => $aspirations
+            'message' => 'Mengambil semua data aspirasi berhasil!',
+            'data' => $aspirations->makeHidden([
+                "id",
+                'created_at',
+                'updated_at',
+                'is_read'
+            ])
         ]);
     }
 
@@ -33,8 +38,54 @@ class AspirationController extends Controller
 
         return response()->json([
             "status" => true,
-            "message" => "",
-            "data" => $aspiration
+            "message" => "Detail Aspirasi",
+            "data" => $aspiration->makeHidden([
+                "id",
+                "created_at",
+                "updated_at",
+                "is_read"
+            ])
+        ]);
+    }
+
+    public function showByStatus($status)
+    {
+        if ($status == 'dibaca') {
+            $statusId = 1;
+        } else if ($status == 'belum') {
+            $statusId = 0;
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Input yang kamu masukkan salah!',
+                'data' => null
+            ]);
+        }
+
+        $aspirations = Aspiration::query()->where('is_read', $statusId)->get();
+
+        if ($statusId == 0) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Daftar aspirasi yang belum dibaca!',
+                'data' => $aspirations->makeHidden([
+                    'id',
+                    'created_at',
+                    'updated_at',
+                    'is_read'
+                ])
+            ]);
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Daftar aspirasi yang sudah dibaca!',
+            'data' => $aspirations->makeHidden([
+                'id',
+                'created_at',
+                'updated_at',
+                'is_read'
+            ])
         ]);
     }
 
@@ -54,7 +105,7 @@ class AspirationController extends Controller
             }
         }
 
-        
+
         $payload['photo'] = $request->file("photo")->store("images", "public");
 
         $aspiration = Aspiration::create($payload);
@@ -64,9 +115,9 @@ class AspirationController extends Controller
             "data" => $aspiration->makeHidden([
                 "id",
                 "created_at",
-                "updated_at"
+                "updated_at",
+                "is_read"
             ])
         ]);
-        
     }
 }
