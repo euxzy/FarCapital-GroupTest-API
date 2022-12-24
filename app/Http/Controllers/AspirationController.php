@@ -18,6 +18,26 @@ class AspirationController extends Controller
         ]);
     }
 
+    function detail($id)
+    {
+        $aspiration = Aspiration::find($id);
+
+        // memeriksa apakah terdapat aspirasi dengan id sesuai yang diberikan
+        if (!isset($aspiration)) {
+            return response()->json([
+                "status" => false,
+                "message" => "Aspirasi tidak ditemukan",
+                "data" => null
+            ]);
+        }
+
+        return response()->json([
+            "status" => true,
+            "message" => "",
+            "data" => $aspiration
+        ]);
+    }
+
     public function store(Request $request)
     {
         $payload = $request->all();
