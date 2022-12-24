@@ -18,7 +18,7 @@ class AspirationController extends Controller
         ]);
     }
 
-    function detail($id)
+    public function show($id)
     {
         $aspiration = Aspiration::find($id);
 
