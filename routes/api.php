@@ -13,5 +13,6 @@ Route::prefix('/aspiration')
   ->group(function () {
     Route::get('/', 'index');
     Route::get('/detail/{id}', 'show');
+    Route::get('/status/{status}', 'showByStatus');
     Route::post('/add', 'store');
   });

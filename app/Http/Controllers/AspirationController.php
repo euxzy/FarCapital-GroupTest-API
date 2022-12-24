@@ -38,6 +38,37 @@ class AspirationController extends Controller
         ]);
     }
 
+    public function showByStatus($status)
+    {
+        if ($status == 'dibaca') {
+            $statusId = 1;
+        } else if ($status == 'belum') {
+            $statusId = 0;
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Input yang kamu masukkan salah!',
+                'data' => null
+            ]);
+        }
+
+        $aspirations = Aspiration::query()->where('is_read', $statusId)->get();
+
+        if ($statusId == 0) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Daftar aspirasi yang belum dibaca!',
+                'data' => $aspirations
+            ]);
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Daftar aspirasi yang sudah dibaca!',
+            'data' => $aspirations
+        ]);
+    }
+
     public function store(Request $request)
     {
         $payload = $request->all();
@@ -54,7 +85,7 @@ class AspirationController extends Controller
             }
         }
 
-        
+
         $payload['photo'] = $request->file("photo")->store("images", "public");
 
         $aspiration = Aspiration::create($payload);
@@ -67,6 +98,5 @@ class AspirationController extends Controller
                 "updated_at"
             ])
         ]);
-        
     }
 }
