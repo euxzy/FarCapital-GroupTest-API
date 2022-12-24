@@ -15,7 +15,6 @@ class AspirationController extends Controller
             'status' => true,
             'message' => 'Mengambil semua data aspirasi berhasil!',
             'data' => $aspirations->makeHidden([
-                "id",
                 'updated_at',
             ])
         ]);
@@ -38,7 +37,6 @@ class AspirationController extends Controller
             "status" => true,
             "message" => "Detail Aspirasi",
             "data" => $aspiration->makeHidden([
-                "id",
                 "updated_at",
             ])
         ]);
@@ -65,7 +63,6 @@ class AspirationController extends Controller
                 'status' => true,
                 'message' => 'Daftar aspirasi yang belum dibaca!',
                 'data' => $aspirations->makeHidden([
-                    'id',
                     'updated_at',
                 ])
             ]);
@@ -75,7 +72,6 @@ class AspirationController extends Controller
             'status' => true,
             'message' => 'Daftar aspirasi yang sudah dibaca!',
             'data' => $aspirations->makeHidden([
-                'id',
                 'updated_at',
             ])
         ]);
@@ -105,7 +101,6 @@ class AspirationController extends Controller
             "status" => true,
             "message" => "Aspirasi berhasil ditambahkan",
             "data" => $aspiration->makeHidden([
-                "id",
                 "updated_at",
             ])
         ]);
