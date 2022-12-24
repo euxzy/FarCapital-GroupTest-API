@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('aspirator', 50);
             $table->string('nik', 16);
-            $table->text('story')->nullable();
-            $table->text('photo')->nullable();
+            $table->text('story');
+            $table->text('photo');
             $table->tinyInteger('is_read')->default(0);
             $table->timestamps();
         });
