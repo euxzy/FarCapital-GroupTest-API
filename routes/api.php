@@ -12,5 +12,6 @@ Route::prefix('/aspiration')
   ->controller(AspirationController::class)
   ->group(function () {
     Route::get('/', 'index');
+    Route::get('/detail/{id}', 'show');
     Route::post('/add', 'store');
   });
