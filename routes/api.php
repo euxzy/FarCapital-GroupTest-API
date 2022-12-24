@@ -15,4 +15,5 @@ Route::prefix('/aspiration')
     Route::get('/detail/{id}', 'show');
     Route::get('/status/{status}', 'showByStatus');
     Route::post('/add', 'store');
+    Route::post('/update/{id}', 'update');
   });

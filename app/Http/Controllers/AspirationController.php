@@ -105,4 +105,29 @@ class AspirationController extends Controller
             ])
         ]);
     }
+
+    public function update(Request $request, $id)
+    {
+        $payload = [
+            'is_read' => $request->id
+        ];
+
+        $aspiration = Aspiration::query()->where('id', $id)->first();
+        if (!$aspiration) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Aspirasi Tidak Ditemukan!',
+                'data' => null
+            ]);
+        }
+
+        $aspiration->update($payload);
+        return response()->json([
+            'status' => true,
+            'message' => 'Aspirasi Sudah Dibaca',
+            'data' => $aspiration->makeHidden([
+                'updated_at',
+            ])
+        ]);
+    }
 }
