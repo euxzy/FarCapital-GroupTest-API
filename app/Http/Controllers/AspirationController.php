@@ -54,17 +54,19 @@ class AspirationController extends Controller
             }
         }
 
+        
         $payload['photo'] = $request->file("photo")->store("images", "public");
 
-        $author = Aspiration::create($payload);
+        $aspiration = Aspiration::create($payload);
         return response()->json([
             "status" => true,
             "message" => "Aspirasi berhasil ditambahkan",
-            "data" => $author->makeHidden([
+            "data" => $aspiration->makeHidden([
                 "id",
                 "created_at",
                 "updated_at"
             ])
         ]);
+        
     }
 }
